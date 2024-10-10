@@ -1,11 +1,15 @@
-const sessionIdToUserMap = new Map();
+const jwt = require('jsonwebtoken')
+const secret = 'satpal'
 
-function setUser (sessionId, user) {
-    sessionIdToUserMap.set(sessionId, user);
+function setUser (user) {
+    return jwt.sign({
+        _id : user._id,
+        email : user.email
+    }, secret)
 }
 
-function getUser (sessionId) {
-    return sessionIdToUserMap.get(sessionId);
+function getUser (token) {
+    return jwt.verify(token, secret)
 }
 
 module.exports = {

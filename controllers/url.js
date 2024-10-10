@@ -10,7 +10,8 @@ async function handleGenerateNewShortId (req, res) {
     await URL.create({
         shortId : shortId,
         redirectUrl : redirectUrl,
-        visitHistory : []
+        visitHistory : [],
+        createdBy : req.user._id,
     })
 
     return res.render("home", {
